@@ -1,0 +1,546 @@
+{
+	"info": {
+		"_postman_id": "9c32a4b3-8520-45a1-891f-0a3ac74679a1",
+		"name": "E_Commerse",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26927062",
+		"_collection_link": "https://www.postman.com/altimetry-engineer-834583/workspace/api/collection/26927062-9c32a4b3-8520-45a1-891f-0a3ac74679a1?action=share&source=collection_link&creator=26927062"
+	},
+	"item": [
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "createCategory",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "E_COMMERCE__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlZGlib2Y2NjZAZ3Jhc3NkZXYuY29tIiwiaWQiOiI2NWIxNmNlMjRlZmZkMzk2NTU2YTk3ZGMiLCJpYXQiOjE3MDYxMzgxNTAsImV4cCI6MTcwODczMDE1MH0.deGJYiAncZpft_xUnUjREM8FnaxYvECmAT7Z64bUSI0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "fashion shop man",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/ma042/OneDrive/الصور/Screenshots/Screenshot 2024-01-19 142112.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{hosts}}/category/",
+							"host": [
+								"{{hosts}}"
+							],
+							"path": [
+								"category",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "allCategories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{hosts}}category/",
+							"host": [
+								"{{hosts}}category"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCategories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{hosts}}category/65a5a2da0c8d01a52c9b4931",
+							"host": [
+								"{{hosts}}category"
+							],
+							"path": [
+								"65a5a2da0c8d01a52c9b4931"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateCategory",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "fashion shops",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/ma042/Downloads/cld-sample-2.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{hosts}}category/65a66d0d5699f81b6876f9c1",
+							"host": [
+								"{{hosts}}category"
+							],
+							"path": [
+								"65a66d0d5699f81b6876f9c1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "subCategory",
+			"item": [
+				{
+					"name": "CreatesubCategory",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "NIKE",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/ma042/Downloads/cld-sample-3.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{hosts}}category/65a5a2da0c8d01a52c9b4931/subcategory",
+							"host": [
+								"{{hosts}}category"
+							],
+							"path": [
+								"65a5a2da0c8d01a52c9b4931",
+								"subcategory"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update subCategory",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "addides",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/ma042/Downloads/analog-classic.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{hosts}}category/65a5a2da0c8d01a52c9b4931/subcategory/65a5a924a31bafa6de5909fb",
+							"host": [
+								"{{hosts}}category"
+							],
+							"path": [
+								"65a5a2da0c8d01a52c9b4931",
+								"subcategory",
+								"65a5a924a31bafa6de5909fb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "allSubCategories",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "BM1",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/ma042/Downloads/leather-bag-gray.jpg",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{hosts}}category/65a5a2da0c8d01a52c9b4931/subcategory",
+							"host": [
+								"{{hosts}}category"
+							],
+							"path": [
+								"65a5a2da0c8d01a52c9b4931",
+								"subcategory"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSubCategories",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "BM1",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/ma042/Downloads/leather-bag-gray.jpg",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{hosts}}category/65a5a2da0c8d01a52c9b4931/subcategory/65a5a924a31bafa6de5909fb",
+							"host": [
+								"{{hosts}}category"
+							],
+							"path": [
+								"65a5a2da0c8d01a52c9b4931",
+								"subcategory",
+								"65a5a924a31bafa6de5909fb"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "coupon",
+			"item": [
+				{
+					"name": "createCoupon",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "moss",
+									"type": "text"
+								},
+								{
+									"key": "amount",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": [],
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{hosts}}/coupon/",
+							"host": [
+								"{{hosts}}"
+							],
+							"path": [
+								"coupon",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "allcoupon",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{hosts}}/coupon/",
+							"host": [
+								"{{hosts}}"
+							],
+							"path": [
+								"coupon",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCoupon",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{hosts}}coupon/65a718175e061dd66e113c06",
+							"host": [
+								"{{hosts}}coupon"
+							],
+							"path": [
+								"65a718175e061dd66e113c06"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateCoupon",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "shoeses",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/ma042/Downloads/accessories-bag.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{hosts}}/coupon/65a718175e061dd66e113c06",
+							"host": [
+								"{{hosts}}"
+							],
+							"path": [
+								"coupon",
+								"65a718175e061dd66e113c06"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Brand",
+			"item": [
+				{
+					"name": "createBrand",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "NB",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/ma042/OneDrive/الصور/Screenshots/Screenshot 2024-01-17 013254.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{hosts}}/brand/",
+							"host": [
+								"{{hosts}}"
+							],
+							"path": [
+								"brand",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "allBrand",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{hosts}}brand/",
+							"host": [
+								"{{hosts}}brand"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getBrand",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{hosts}}brand/65a67fd21e869910e9c41158",
+							"host": [
+								"{{hosts}}brand"
+							],
+							"path": [
+								"65a67fd21e869910e9c41158"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateBrand",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "NewB",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/ma042/Downloads/cld-sample-5.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{hosts}}brand/65a67fd21e869910e9c41158",
+							"host": [
+								"{{hosts}}brand"
+							],
+							"path": [
+								"65a67fd21e869910e9c41158"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "signUp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\":\"mohamed_ali7\",\r\n  \"email\":\"tedibof666@grassdev.com\",\r\n  \"password\":\"12Mohamed22\",\r\n  \"cPassword\":\"12Mohamed22\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hosts}}/auth/signUp",
+							"host": [
+								"{{hosts}}"
+							],
+							"path": [
+								"auth",
+								"signUp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logIn",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n  \"email\":\"tedibof666@grassdev.com\",\r\n  \"password\":\"12Mohamed22\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hosts}}/auth/logIn",
+							"host": [
+								"{{hosts}}"
+							],
+							"path": [
+								"auth",
+								"logIn"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
