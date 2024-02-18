@@ -50,8 +50,8 @@ const orderSchema = new Schema(
 		},
 		paymentTypes: {
 			type: String,
-			enum: ["Card", "Cash"],
-			default: "Cash",
+			enum: ["card", "cash"],
+			default: "cash",
 		},
 		finalPrice: {
 			type: Number,

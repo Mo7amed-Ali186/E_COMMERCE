@@ -5,11 +5,13 @@ import productModel from "../../../../DB/models/Product.model.js";
 import orderModel from "../../../../DB/models/Order.model.js";
 import couponModel from "../../../../DB/models/Coupon.model.js";
 import createInvoice from "../../../utils/pdfInvoice.js";
+import payment from "../../../utils/payment.js";
+import Stripe from "stripe";
 
 export const createOrder = asyncHandler(async (req, res, next) => {
 	let { products, couponName } = req.body;
 	const { _id } = req.user;
-
+    let amount=0
 	let coupon = { amount: 0 };
 	if (couponName) {
 		coupon = await couponModel.findOne({
@@ -22,6 +24,7 @@ export const createOrder = asyncHandler(async (req, res, next) => {
 		if (coupon.expireIn && coupon.expireIn.getTime() < new Date().getTime()) {
 			return next(new Error("expire coupon", { cause: 404 }));
 		}
+		amount = coupon.amount
 		req.body.couponId = coupon._id;
 	}
 
@@ -105,6 +108,41 @@ export const createOrder = asyncHandler(async (req, res, next) => {
 			},
 		],
 	});
+	if (order.paymentTypes == "card") {
+		const stripe = new Stripe(process.env.STRIPE_KEY);
+		let couponStripe ;
+		if (couponName) {
+			couponStripe = await stripe.coupons.create({
+				percent_off: amount,
+				duration: "once",
+			});
+		}
+
+		const session = await payment({
+			// stripe,
+			metadata: {
+				orderId: order._id.toString(),
+			},
+			discounts: amount ? [{ coupon: couponStripe.id }] : [],
+			success_url: `${process.env.SUCCESS_URL}/${order._id}`,
+			cancel_url: `${process.env.CANCEL_URL}/${order._id}`,
+			customer_email: req.user.email,
+			line_items: order.products.map((element) => {
+				return {
+					price_data: {
+						currency: "USD",
+						product_data: {
+							name: element.name,
+						},
+						unit_amount: element.unitPrice * 100,
+					},
+					quantity: element.quantity,
+				};
+			}),
+		});
+		return res.json({ message: "Done", order, session });
+	}
+
 	return res.json({ message: "Done", order });
 });
 

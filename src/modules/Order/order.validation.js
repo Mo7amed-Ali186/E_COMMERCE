@@ -4,7 +4,7 @@ import { generalFields } from "../../utils/generalFields.js";
 export const createOrderSchema = joi.object({
 	address: joi.string().min(20).max(100).required(),
 	phone: joi.array().items(joi.string().required()).required(),
-	paymentType: joi.string().valid("Card", "Cash"),
+	paymentTypes: joi.string().valid("card", "cash"),
 	note: joi.string().min(20),
 	reason: joi.string(),
 	couponName: joi.string().max(20).min(3).trim(),

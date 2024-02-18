@@ -9,9 +9,16 @@ router
 		validation(authValidation.signUpSchema),
 		authController.signUp,
 	)
-	.post("/logIn", validation(authValidation.logInSchema), authController.logIn)
-	.get("/confirmEmail/:token", authController.confirmEmail)
-	.get("/refreshToken/:token", authController.refreshToken)
+	.post(
+		"/logIn",
+		 validation(authValidation.logInSchema),
+		  authController.logIn
+		  )
+	.get(
+		"/confirmEmail/:token",
+		 authController.confirmEmail)
+	.get("/refreshToken/:token", authController.refreshToken
+	)
 	.patch(
 		"/sendCode",
 		validation(authValidation.sendCodeSchema),
