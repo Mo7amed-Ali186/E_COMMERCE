@@ -9,12 +9,12 @@
 //     })
 // }
 
-import mongoose from 'mongoose';
+import Mongoose from 'mongoose';
 
 export const connection = async () => {
     try {
-        await mongoose.connect(process.env.URI, {
-            bufferCommands: false, // Disable command buffering
+        await Mongoose.connect(process.env.URI, {
+            // bufferCommands: false, // Disable command buffering
             bufferTimeoutMS: 0,    // Set buffer timeout to 0ms
             useNewUrlParser: true,
             useUnifiedTopology: true,
