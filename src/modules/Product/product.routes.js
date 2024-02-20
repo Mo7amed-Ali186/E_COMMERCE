@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { fileValidation, uploadFile } from "../../utils/multer.js";
 import * as productController from "./controller/product.controller.js";
-import * as productValidation from "./Product.validation.js";
+import * as productValidation from "./product.validation.js";
 import auth from "../../middleware/auth.js";
 import productEndPoint from "./product.endPoint.js";
 import validation from "../../middleware/validation.js";
