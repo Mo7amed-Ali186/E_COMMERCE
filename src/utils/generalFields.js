@@ -8,7 +8,7 @@ export const validateObjectId = (value, helper) => {
 
 export const generalFields = {
     email : joi.string().email({tlds:{allow:['com','net']}}).required(),
-    password:joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).required(),
+    password:joi.string().pattern(new RegExp(/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/)).required(),
     token : joi.string().required(),
     id: joi.string().custom(validateObjectId).required(),
     _id: joi.string().custom(validateObjectId),
