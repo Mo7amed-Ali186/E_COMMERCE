@@ -1,4 +1,3 @@
-import { compare } from "bcrypt";
 import userModel from "../../../../DB/models/User.model.js";
 import { sendEmail } from "../../../utils/Email.js";
 import { asyncHandler } from "../../../utils/errorHandler.js";
