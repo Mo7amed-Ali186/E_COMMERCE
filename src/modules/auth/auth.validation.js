@@ -20,7 +20,7 @@ export const sendCodeSchema = joi.object({
 }).required();
 export const forgetPasswordSchema = joi.object({
     email:generalFields.email,
-code:joi.string().pattern(new RegExp(/^\d{5}$/)).required(),
+    code:joi.string().pattern(new RegExp(/^\d{5}$/)).required(),
     password:generalFields.password,
     cPassword:joi.string().valid(joi.ref('password')).required()
 

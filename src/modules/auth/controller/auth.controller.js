@@ -53,7 +53,7 @@ export const signUp = asyncHandler(async (req, res, next) => {
 	// Hash password
 	req.body.password = hashPassword({ plaintext: req.body.password });
 	const newUser = await userModel.create(req.body);
-	return res.status(201).json({ message: "Done", user: newUser._id });
+	return res.status(201).json({ message: "Done", user: newUser});
 });
 /*
 1-get email and password
@@ -87,7 +87,7 @@ export const logIn = asyncHandler(async (req, res, next) => {
 		signature: process.env.TOKEN_SIGNATURE,
 		expiresIn: 60 * 60 * 24 * 30,
 	});
-	await userModel.updateOne({ email }, { status: "Online" });
+	await userModel.updateMany({ email }, { status: "Online" });
 	return res.json({ message: "Done", token, rf_token });
 });
 /*
@@ -140,7 +140,7 @@ export const refreshToken = asyncHandler(async (req, res, next) => {
 	if (!email) {
 		return res.redirect("https://www.google.com.eg/?hl=ar");
 	}
-	const user = await userModel.findOneAndUpdate({ email });
+	const user = await userModel.findOne({ email });
 	if (!user) {
 		return res.redirect("https://www.google.com.eg/?hl=ar");
 	}
