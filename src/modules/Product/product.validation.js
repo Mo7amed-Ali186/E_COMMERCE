@@ -13,8 +13,8 @@ export const oneProductSchema = joi
         price: joi.number().positive().min(2).required(), // Change this line
         discount: joi.number().positive(),
         stock: joi.number().positive().min(2).required(), // Assuming stock is numeric
-        colors: joi.array(),
-        size: joi.array(),
+        colors: joi.string(),
+        size: joi.string(),
         files: joi.object({
             mainImage: joi.array().items(generalFields.file.required()).length(1).required(),
             subImage: joi

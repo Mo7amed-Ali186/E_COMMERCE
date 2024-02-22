@@ -21,7 +21,7 @@ export const updateCouponSchema = joi
 		couponId: generalFields.id.required(),
 		name: joi.string().max(20).min(3).trim(),
 		file: generalFields.file,
-		amount: joi.number().positive().min(1).max(100).required(),
+		amount: joi.number().positive().min(1).max(100),
 		expireIn: joi.string(),
 	})
 	.required();

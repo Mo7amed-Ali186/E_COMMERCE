@@ -66,9 +66,51 @@ export const addToCart = asyncHandler(async (req, res, next) => {
 })
 
 
+export const clearCart=asyncHandler(
+	async (req,res,next)=>{
+	  const {_id}=req.user
+  
+	  const cart=await cartModel.findOne({userId:_id})
+  
+	  if(!cart){
+  
+		return next (new Error ("Cart Not Found",{cause:404}))
+	  }
+  
+	  const newCart=await cartModel.findByIdAndUpdate({_id:cart._id},
+		{
+		  products:[]
+		},{new:true}
+		)
+		return res.status(200).json({ message: "Done", cart: newCart })
+  
+	}
+  )
 
-
-
+  export const deleteFromCart=asyncHandler(
+	async (req,res,next)=>{
+	  const {_id}=req.user
+  
+	  const cart=await cartModel.findOne({userId:_id})
+  
+	  if(!cart){
+  
+		return next (new Error ("Cart Not Found",{cause:404}))
+	  }
+  
+	  const newCart=await cartModel.findByIdAndUpdate({_id:cart._id},
+		{
+		  $pull:{
+			  products:{
+				productId: {$in :req.params.productId}
+			  }
+		  }
+		},{new:true}
+		)
+		return res.status(200).json({ message: "Done", cart: newCart })
+  
+	}
+  )
 
 
 
