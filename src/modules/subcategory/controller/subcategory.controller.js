@@ -66,9 +66,9 @@ export const getSubCategories = asyncHandler(async (req, res, next) => {
 
 //update updateSubCategory
 export const updateSubCategory = asyncHandler(async (req, res, next) => {
-	const { subCategoryId } = req.params;
-	const subCategory = await subCategoryModel.findById({ _id: subCategoryId });
-	if (!subCategory) {
+	const { subcategoryId } = req.params;
+   const subCategory = await subCategoryModel.findById({ _id: subcategoryId });
+if (!subCategory) {
 		return next(new Error("subCategory No Found", { cause: 404 }));
 	}
 
@@ -95,7 +95,7 @@ export const updateSubCategory = asyncHandler(async (req, res, next) => {
 
 	req.body.updatedBy = req.user._id;
 	const updatedSubCategory = await subCategoryModel.findOneAndUpdate(
-		{ _id: subCategoryId },
+		{ _id: subcategoryId },
 		req.body,
 		{ new: true },
 	);
@@ -103,42 +103,3 @@ export const updateSubCategory = asyncHandler(async (req, res, next) => {
 		.status(200)
 		.json({ message: "Done", Subcategory: updatedSubCategory });
 });
-//     const { subcategoryId } = req.params;
-//     const { name } = req.body;
-//     // Check if subCategory exists
-//     const subCategory = await subCategoryModel.findById({ _id: subcategoryId });
-
-//     if (!subCategory) {
-//         return next(new Error("Invalid SubCategory id", { cause: 404 }));
-//     }
-
-//     // Check if new name already exists
-//     if (subCategory.name) {
-//         if (name !== subCategory.name && (await subCategoryModel.findOne({ name }))) {
-//             return next(new Error("Name already exists", { cause: 400 }));
-//         }
-// 		subCategory.slug = slugify(name);
-// 	  }
-//     // Upload the new image to Cloudinary
-//     if (req.file) {
-//     const { secure_url, public_id } = await cloudinary.uploader.upload(
-//         req.file.path,
-//         {
-//             folder: `${process.env.APP_NAME}/category/${req.params.categoryId}/subCategory`,
-//         },
-//     );
-
-//     if (!secure_url) {
-//         return next(new Error("Image not found", { cause: 400 }));
-//     }
-//         subCategory.image = { public_id, secure_url };
-// 		await cloudinary.uploader.destroy(subCategory.image.public_id);
-
-// }
-// 	subCategory.updatedBy = req.user._id
-
-//     // Save the updated category
-//     const newSubCategory = await subCategory.save();
-
-//     return res.status(200).json({ message: "Done", subCategory: newSubCategory });
-// });

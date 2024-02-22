@@ -22,7 +22,6 @@ export const createCoupon = asyncHandler(async (req, res, next) => {
 		req.body.image = { public_id, secure_url };
 	}
 	req.body.createdBy = req.user._id
-	// req.body.usedBy = req.user._id
     
 	const coupon = await couponModel.create(req.body);
 	return res.status(201).json({ message: "Done", coupon });
