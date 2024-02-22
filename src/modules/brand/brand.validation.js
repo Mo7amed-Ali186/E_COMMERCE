@@ -8,7 +8,7 @@ export const getBrandSchema = joi.object({
 
 export const createBrandSchema = joi.object({
     name:joi.string().max(20).min(3).trim().required(),
-    file:generalFields.file.required()
+    file:generalFields.file
   }).required();
 
   export const updateBrandSchema = joi.object({
