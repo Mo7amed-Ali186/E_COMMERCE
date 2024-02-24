@@ -287,7 +287,11 @@ export const webhook = asyncHandler(async (req, res, next) => {
 		await orderModel.updateOne(
 			{ _id: event.data.object.orderId },
 			{ status: "placed" },
-		);
+			
+		)
+
+		return res.json({ message: "Done" });
+
 	} else {
 		return next(new Error("failed to checkout please try again"));
 	}
