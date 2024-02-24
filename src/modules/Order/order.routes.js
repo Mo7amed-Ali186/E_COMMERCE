@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { fileValidation, uploadFile } from "../../utils/multer.js";
 import * as orderController from "./controller/order.controller.js";
 import * as orderValidation from "./order.validation.js";
 import validation from "../../middleware/validation.js";
 import auth from "../../middleware/auth.js";
 import orderEndPoint from "./order.endPoint.js";
+import express from "express";
 
 const router = Router();
 router
@@ -35,6 +35,11 @@ router
 		auth(orderEndPoint.delivered),
 		validation(orderValidation.cancelOrderSchema),
 		orderController.deliveredOrder,
+	)
+	.post(
+		"/webhook",
+		express.raw({ type: "application/json" }),
+		orderController.webhook,
 	);
 
 export default router;

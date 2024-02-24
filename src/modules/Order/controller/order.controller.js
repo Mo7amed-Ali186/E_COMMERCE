@@ -11,7 +11,7 @@ import Stripe from "stripe";
 export const createOrder = asyncHandler(async (req, res, next) => {
 	let { products, couponName } = req.body;
 	const { _id } = req.user;
-    let amount=0
+	let amount = 0;
 	let coupon = { amount: 0 };
 	if (couponName) {
 		coupon = await couponModel.findOne({
@@ -24,7 +24,7 @@ export const createOrder = asyncHandler(async (req, res, next) => {
 		if (coupon.expireIn && coupon.expireIn.getTime() < new Date().getTime()) {
 			return next(new Error("expire coupon", { cause: 404 }));
 		}
-		amount = coupon.amount
+		amount = coupon.amount;
 		req.body.couponId = coupon._id;
 	}
 
@@ -110,7 +110,7 @@ export const createOrder = asyncHandler(async (req, res, next) => {
 	});
 	if (order.paymentTypes == "card") {
 		const stripe = new Stripe(process.env.STRIPE_KEY);
-		let couponStripe ;
+		let couponStripe;
 		if (couponName) {
 			couponStripe = await stripe.coupons.create({
 				percent_off: amount,
@@ -263,4 +263,32 @@ export const rejectOrder = asyncHandler(async (req, res, next) => {
 	return res
 		.status(200)
 		.json({ message: "Order successfully rejected", updatedOrder });
+});
+
+export const webhook = asyncHandler(async (req, res, next) => {
+	const stripe = new Stripe(process.env.STRIPE_KEY);
+	const sig = req.headers["stripe-signature"];
+
+	let event;
+
+	try {
+		event = stripe.webhooks.constructEvent(
+			req.body,
+			sig,
+			process.env.END_POINT_SECRET,
+		);
+	} catch (err) {
+		res.status(400).send(`Webhook Error: ${err.message}`);
+		return;
+	}
+
+	// Handle the event
+	if (event.type == "checkout.session.completed") {
+		await orderModel.updateOne(
+			{ _id: event.data.object.orderId },
+			{ status: "placed" },
+		);
+	} else {
+		return next(new Error("failed to checkout please try again"));
+	}
 });
