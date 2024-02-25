@@ -8,6 +8,7 @@ import brandRouter from "./modules/brand/brand.routes.js";
 import productRouter from "./modules/Product/product.routes.js";
 import cartRouter from "./modules/Cart/cart.routes.js";
 import orderRouter from "./modules/Order/order.routes.js";
+import userRouter from "./modules/User/user.routes.js";
 export function bootstrap(app, express) {
 	connection();
 	app.use((req, res, next) => {
@@ -25,6 +26,7 @@ export function bootstrap(app, express) {
 	app.use("/product", productRouter);
 	app.use("/cart", cartRouter);
 	app.use("/order", orderRouter);
+	app.use("/user", userRouter);
 	app.use("*", (req, res, next) => {
 		return res.json({ message: "Invalid Request" });
 	});
