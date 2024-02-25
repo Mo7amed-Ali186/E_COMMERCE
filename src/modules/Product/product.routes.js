@@ -46,6 +46,13 @@ router
 		"/:productId",
 		validation(productValidation.oneProductSchema),
 		productController.getProduct,
+	)
+	.delete(
+		"/",
+		validation(productValidation.tokenSchema, true),
+		validation(productValidation.deleteProductSchema),
+		auth(productEndPoint.delete),
+		productController.deleteProduct,
 	);
 
 export default router;

@@ -55,3 +55,6 @@ export const updateProductSchema = joi
 export const tokenSchema = joi.object({
         authorization:joi.string().required()
     }).required()
+    export const deleteProductSchema = joi.object({
+		productId: generalFields.id,
+    }).required()

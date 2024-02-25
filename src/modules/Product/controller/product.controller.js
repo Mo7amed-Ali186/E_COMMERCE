@@ -168,3 +168,42 @@ req.body.finalPrice = req.body.price || product.price  - (req.body.price || prod
 const newProduct = await productModel.findByIdAndUpdate({_id:productId},req.body,{new:true});
 	return res.status(200).json({ message: "Done", newProduct });
 });
+
+
+/*
+Finds the product by its ID.
+Checks if the product exists.
+Deletes the main image from Cloudinary if it exists.
+Deletes the sub images from Cloudinary if they exist.
+Deletes the product from the database.
+*/
+export const deleteProduct = asyncHandler(async (req, res, next) => {
+    const { productId } = req.params;
+
+    // Step 1: Find the product by its ID
+    const product = await productModel.findById(productId);
+
+    // Step 2: Check if the product exists
+    if (!product) {
+        return next(new Error("Product not found", { cause: 404 }));
+    }
+
+    // Step 3: Delete the main image from Cloudinary if it exists
+    if (product.mainImage?.public_id) {
+        await cloudinary.uploader.destroy(product.mainImage.public_id);
+    }
+
+    // Step 4: Delete the sub images from Cloudinary if they exist
+    if (product.subImage && product.subImage.length > 0) {
+        for (const image of product.subImage) {
+            if (image.public_id) {
+                await cloudinary.uploader.destroy(image.public_id);
+            }
+        }
+    }
+
+    // Step 5: Delete the product from the database
+    await productModel.findByIdAndDelete(productId);
+
+    return res.status(200).json({ message: "Product deleted successfully" });
+});
