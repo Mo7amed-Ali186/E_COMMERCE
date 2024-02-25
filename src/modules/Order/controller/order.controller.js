@@ -73,6 +73,8 @@ export const createOrder = asyncHandler(async (req, res, next) => {
 	req.body.products = allProducts;
 	req.body.subPrice = subPrice;
 	req.body.finalPrice = subPrice - (subPrice * coupon?.amount || 0) / 100;
+	req.body.status =
+		req.body.paymentTypes == "cash" ? "placed" : "waitForPayment";
 	const order = await orderModel.create(req.body);
 	if (couponName) {
 		await couponModel.updateOne(
@@ -287,11 +289,9 @@ export const webhook = asyncHandler(async (req, res, next) => {
 		await orderModel.updateOne(
 			{ _id: event.data.object.orderId },
 			{ status: "placed" },
-			
-		)
+		);
 
 		return res.json({ message: "Done" });
-
 	} else {
 		return next(new Error("failed to checkout please try again"));
 	}
