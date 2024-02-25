@@ -1,7 +1,7 @@
 import userModel from "../../../../DB/models/User.model.js";
 import { asyncHandler } from "../../../utils/errorHandler.js";
 
-//update account.- you can update ( email , mobileNumber , recoveryEmail , DOB , lastName , firstName)- if user update the email , mobileNumber make sure that the new data doesn’t conflict with any existing data in your  database
+//update account.- you can update ( email , mobileNumber , DOB , )- if user update the email , mobileNumber make sure that the new data doesn’t conflict with any existing data in your  database
 export const updateAccount = asyncHandler(async (req, res, next) => {
     // Get the user ID and role from the authenticated user
     const { _id, role } = req.user;
@@ -11,7 +11,7 @@ export const updateAccount = asyncHandler(async (req, res, next) => {
     if (!user) {
         return next(new Error("User not found or deleted", { cause: 404 }));
     }
-    // Ensure that the user's role is either User or Company HR
+    // Ensure that the user's role is either User 
     if (role !== "User" && role !== "Admin") {
         return next(new Error("You are not authorized to update this account", { cause: 403 }));
     }
@@ -80,22 +80,13 @@ export const getProfileData = asyncHandler(async (req, res, next) => {
 
     return res.status(200).json({ message: "Profile data found", userProfile });
 });
-//Get all accounts associated to a specific recovery Email 
-export const accounts = asyncHandler(
-    async(req,res,next)=>{
-        const { confirmEmail } = req.query;
-  
-        // Find all user accounts with the specified recovery email
-        const userAccounts = await userModel.find({ confirmEmail , isDeleted: false });
-        return res.status(200).json({ message: "Done", userAccounts });
-    }
-)
+
 //Delete account
 export const deleteAccount = asyncHandler(async (req, res, next) => {
 
     // Get the user ID and role from the authenticated user
     const { _id, role } = req.user;
-    // Ensure that the user's role is either User or Company HR
+    // Ensure that the user's role is either User 
     if (role !== "User" && role !== "Admin") {
         return next(new Error("You are not authorized to delete this account", { cause: 403 }));
     }

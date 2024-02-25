@@ -37,12 +37,6 @@ router
 		validation(userValidation.userAccountDataSchema),
 		userController.getUserAccountData,
 	)
-	//Get all accounts associated to a specific recovery Email
-	.get(
-		"/accounts",
-		validation(userValidation.accountSchema),
-		userController.accounts,
-	)
 	//delete Account
 	.delete(
 		"/deleteAccount",
