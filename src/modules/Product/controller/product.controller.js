@@ -1,6 +1,6 @@
-import slugify from "slugify";
 import { nanoid } from "nanoid";
 import { asyncHandler } from "../../../utils/errorHandler.js";
+import slugify from "slugify";
 import brandModel from "../../../../DB/models/Brand.model.js";
 import categoryModel from "../../../../DB/models/Category.model.js";
 import subCategoryModel from "../../../../DB/models/SubCategory.model.js";
