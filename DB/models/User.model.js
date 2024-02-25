@@ -50,7 +50,7 @@ const userSchema=new Schema({
         type:String,
     },
     age:String,
-    phone:String,
+    mobileNumber:String,
     address:String,
     profileImage:Object,
     coverImage:[String],
