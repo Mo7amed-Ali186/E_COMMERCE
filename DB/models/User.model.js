@@ -54,7 +54,10 @@ const userSchema=new Schema({
     address:String,
     profileImage:Object,
     coverImage:[String],
-    DOB:String,
+    DOB:{
+        type: Date,
+    
+    },
 },{
     timestamps:true
 })
