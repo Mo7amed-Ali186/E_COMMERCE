@@ -1,5 +1,5 @@
 
-import { Schema,model } from "mongoose";
+import { Schema,Types,model } from "mongoose";
 
 const userSchema=new Schema({
     userName:{
@@ -56,8 +56,13 @@ const userSchema=new Schema({
     coverImage:[String],
     DOB:{
         type: Date,
-    
     },
+    wishList:[
+        {
+            type:Types.ObjectId,
+            ref:"Product"
+        }
+    ],
 },{
     timestamps:true
 })

@@ -1,6 +1,13 @@
 import joi from 'joi';
 import { generalFields } from '../../utils/generalFields.js';
-
+export const userCreateSchema = joi.object({
+    userName:joi.string().min(2).max(20).required(),
+    email:generalFields.email,
+    password:generalFields.password,
+    age:joi.number(),
+    role:joi.string(),
+    cPassword:joi.string().valid(joi.ref('password')).required()
+}).required();
 export const userUpdateSchema = joi.object({
     userName:joi.string().min(2).max(20),
     email:generalFields.email,
@@ -24,6 +31,7 @@ export const accountSchema = joi.object({
 export const tokenSchema = joi.object({
     authorization:joi.string().required()
 }).required()
-
-
+export const userSchema=joi.object({
+    productId:generalFields.id
+}).required()
 
